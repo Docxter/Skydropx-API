@@ -405,20 +405,25 @@ skydropx-api/
 
 ## 🛠️ Herramientas Incluidas
 
-### Colección de Postman
-Importa la colección completa: [postman/Skydropx_API.postman_collection.json](postman/Skydropx_API.postman_collection.json)
+### 📮 Colección de Postman
+Importa la colección completa con 19+ endpoints listos para usar:
+- [Colección](postman/Skydropx_API.postman_collection.json)
+- [Environment](postman/Skydropx_Sandbox.postman_environment.json)
+- [Guía de uso](postman/README.md)
 
-### CLI Tool
-```bash
-# Instalar CLI
-npm install -g @skydropx/cli
+### 💻 SDKs Disponibles
+- **JavaScript/Node.js**: [src/clients/javascript](src/clients/javascript)
+- **Python**: [src/clients/python](src/clients/python)
 
-# Crear cotización desde terminal
-skydropx quote --from="64000" --to="01000" --weight=2.5
+### 📝 Ejemplos Completos
+Consulta la carpeta [examples/](examples/) con ejemplos funcionales en JavaScript y Python:
+- Autenticación
+- Cotizaciones
+- Envíos
+- Rastreo
+- Webhooks
 
-# Rastrear envío
-skydropx track --number="123456789" --carrier="fedex"
-```
+Ver [RUN_EXAMPLES.md](RUN_EXAMPLES.md) para instrucciones de ejecución.
 
 ## 🔒 Seguridad
 
@@ -454,7 +459,6 @@ Si encuentras un bug, por favor abre un issue en GitHub con:
 
 ## 📞 Soporte
 
-- 📧 **Email API**: api@skydropx.com
 - 📧 **Soporte General**: hola@skydropx.com
 - 📚 **Documentación Oficial**: https://app.skydropx.com/es-MX/api-docs
 - 💬 **Centro de Ayuda**: https://help.skydropx.com
