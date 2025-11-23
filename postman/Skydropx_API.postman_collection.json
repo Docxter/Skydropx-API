@@ -1,0 +1,591 @@
+{
+  "info": {
+    "name": "Skydropx API",
+    "_postman_id": "skydropx-api-collection",
+    "description": "Colección completa de la API de Skydropx para gestión de envíos, cotizaciones, recolecciones y rastreo.\n\n## Configuración\n\n1. Crea un environment con las siguientes variables:\n   - `client_id`: Tu Client ID\n   - `client_secret`: Tu Client Secret\n   - `base_url`: https://app.skydropx.com\n   - `access_token`: (se llenará automáticamente)\n\n2. Las requests de autenticación actualizarán automáticamente el `access_token`\n\n## Documentación\n\nhttps://app.skydropx.com/es-MX/api-docs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://app.skydropx.com",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Get Access Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.environment.set('access_token', response.access_token);",
+                  "    pm.environment.set('token_expires_at', Date.now() + (response.expires_in * 1000));",
+                  "    console.log('✅ Token obtenido y guardado');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"{{client_id}}\",\n  \"client_secret\": \"{{client_secret}}\",\n  \"grant_type\": \"client_credentials\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/oauth/token",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "oauth", "token"]
+            },
+            "description": "Obtiene un access token válido por 2 horas"
+          },
+          "response": []
+        },
+        {
+          "name": "Introspect Token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"{{client_id}}\",\n  \"client_secret\": \"{{client_secret}}\",\n  \"token\": \"{{access_token}}\",\n  \"token_type_hint\": \"access_token\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/oauth/introspect",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "oauth", "introspect"]
+            },
+            "description": "Obtiene información sobre el token actual"
+          },
+          "response": []
+        },
+        {
+          "name": "Revoke Token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"{{client_id}}\",\n  \"client_secret\": \"{{client_secret}}\",\n  \"token\": \"{{access_token}}\",\n  \"token_type_hint\": \"access_token\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/oauth/revoke",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "oauth", "revoke"]
+            },
+            "description": "Revoca el token actual"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de autenticación OAuth 2.0"
+    },
+    {
+      "name": "Quotations",
+      "item": [
+        {
+          "name": "Create Quotation (National)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    pm.environment.set('quotation_id', response.id);",
+                  "    console.log('Quotation ID:', response.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quotation\": {\n    \"address_from\": {\n      \"country_code\": \"MX\",\n      \"postal_code\": \"64000\",\n      \"area_level1\": \"Nuevo León\",\n      \"area_level2\": \"Monterrey\",\n      \"area_level3\": \"Centro\"\n    },\n    \"address_to\": {\n      \"country_code\": \"MX\",\n      \"postal_code\": \"01000\",\n      \"area_level1\": \"Ciudad de México\",\n      \"area_level2\": \"Álvaro Obregón\",\n      \"area_level3\": \"Santa Fe\"\n    },\n    \"packages\": [\n      {\n        \"weight\": 2.5,\n        \"length\": 30,\n        \"width\": 20,\n        \"height\": 15\n      }\n    ]\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/quotations",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "quotations"]
+            },
+            "description": "Crea una cotización nacional"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Quotation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.rates && response.rates.length > 0) {",
+                  "        const bestRate = response.rates",
+                  "            .filter(r => r.success)",
+                  "            .sort((a, b) => parseFloat(a.total) - parseFloat(b.total))[0];",
+                  "        if (bestRate) {",
+                  "            pm.environment.set('rate_id', bestRate.id);",
+                  "            console.log('Best Rate ID:', bestRate.id);",
+                  "            console.log('Carrier:', bestRate.provider_display_name);",
+                  "            console.log('Price:', bestRate.total, bestRate.currency_code);",
+                  "        }",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/quotations/{{quotation_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "quotations", "{{quotation_id}}"]
+            },
+            "description": "Obtiene los resultados de una cotización"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de cotizaciones"
+    },
+    {
+      "name": "Shipments",
+      "item": [
+        {
+          "name": "Create Shipment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    pm.environment.set('shipment_id', response.data.id);",
+                  "    ",
+                  "    // Buscar tracking number en included",
+                  "    const packageInfo = response.included?.find(item => item.type === 'packages');",
+                  "    if (packageInfo) {",
+                  "        pm.environment.set('tracking_number', packageInfo.attributes.tracking_number);",
+                  "        console.log('Shipment ID:', response.data.id);",
+                  "        console.log('Tracking Number:', packageInfo.attributes.tracking_number);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipment\": {\n    \"rate_id\": \"{{rate_id}}\",\n    \"printing_format\": \"thermal\",\n    \"address_from\": {\n      \"name\": \"Juan Pérez\",\n      \"company\": \"Mi Empresa SA\",\n      \"street1\": \"Av. Constitución 123\",\n      \"phone\": \"8112345678\",\n      \"email\": \"juan.perez@miempresa.com\",\n      \"reference\": \"Edificio azul\"\n    },\n    \"address_to\": {\n      \"name\": \"María García\",\n      \"company\": \"Cliente Premium\",\n      \"street1\": \"Insurgentes Sur 456\",\n      \"phone\": \"5587654321\",\n      \"email\": \"maria.garcia@cliente.com\",\n      \"reference\": \"Torre B, piso 3\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/shipments",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "shipments"]
+            },
+            "description": "Crea un nuevo envío"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Shipments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/shipments?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "shipments"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                },
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Lista todos los envíos con paginación"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Shipment by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/shipments/{{shipment_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "shipments", "{{shipment_id}}"]
+            },
+            "description": "Obtiene los detalles de un envío específico"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Shipment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cancellation_reason\": \"Cliente solicitó cancelación\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/shipments/{{shipment_id}}/cancel",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "shipments", "{{shipment_id}}", "cancel"]
+            },
+            "description": "Cancela un envío"
+          },
+          "response": []
+        },
+        {
+          "name": "Protect Shipment (Insurance)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"declared_value\": 1500.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/shipments/{{shipment_id}}/protect",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "shipments", "{{shipment_id}}", "protect"]
+            },
+            "description": "Agrega seguro a un envío"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de envíos"
+    },
+    {
+      "name": "Tracking",
+      "item": [
+        {
+          "name": "Track Shipment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/tracking?tracking_number={{tracking_number}}&carrier_code=fedex",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "tracking"],
+              "query": [
+                {
+                  "key": "tracking_number",
+                  "value": "{{tracking_number}}"
+                },
+                {
+                  "key": "carrier_code",
+                  "value": "fedex",
+                  "description": "Código de paquetería: fedex, dhl, estafeta, ups, etc."
+                }
+              ]
+            },
+            "description": "Rastrea un envío por número de guía"
+          },
+          "response": []
+        },
+        {
+          "name": "Track Multiple Shipments",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trackings\": [\n    {\n      \"tracking_number\": \"794874381730\",\n      \"carrier_code\": \"fedex\"\n    },\n    {\n      \"tracking_number\": \"9876543210\",\n      \"carrier_code\": \"dhl\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/tracking/bulk",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "tracking", "bulk"]
+            },
+            "description": "Rastrea múltiples envíos en una sola petición"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de rastreo"
+    },
+    {
+      "name": "Pickups",
+      "item": [
+        {
+          "name": "Check Pickup Coverage",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"zip\": \"64000\",\n  \"country_code\": \"MX\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/pickup_coverage",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pickup_coverage"]
+            },
+            "description": "Verifica si hay cobertura de recolección"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Pickup",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    pm.environment.set('pickup_id', response.data.id);",
+                  "    console.log('Pickup ID:', response.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickup\": {\n    \"address\": {\n      \"name\": \"Juan Pérez\",\n      \"street1\": \"Av. Constitución 123\",\n      \"zip\": \"64000\",\n      \"country_code\": \"MX\",\n      \"phone\": \"8112345678\",\n      \"email\": \"juan@empresa.com\",\n      \"reference\": \"Edificio azul\"\n    },\n    \"pickup_date\": \"2024-01-25\",\n    \"pickup_time_from\": \"09:00\",\n    \"pickup_time_to\": \"13:00\",\n    \"shipment_ids\": [\n      \"{{shipment_id}}\"\n    ],\n    \"instructions\": \"Tocar en recepción\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/pickups",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pickups"]
+            },
+            "description": "Programa una recolección"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pickups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/pickups?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pickups"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Lista las recolecciones"
+          },
+          "response": []
+        },
+        {
+          "name": "Reschedule Pickup",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pickup_date\": \"2024-01-26\",\n  \"pickup_time_from\": \"10:00\",\n  \"pickup_time_to\": \"14:00\",\n  \"reason\": \"Cliente no disponible\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/pickups/{{pickup_id}}/reschedule",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pickups", "{{pickup_id}}", "reschedule"]
+            },
+            "description": "Reprograma una recolección"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de recolecciones"
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Create Webhook",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    pm.environment.set('webhook_id', response.data.id);",
+                  "    pm.environment.set('webhook_secret', response.data.attributes.secret);",
+                  "    console.log('Webhook ID:', response.data.id);",
+                  "    console.log('⚠️ Guarda el secret:', response.data.attributes.secret);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhook\": {\n    \"url\": \"https://miservidor.com/webhooks/skydropx\",\n    \"events\": [\n      \"shipment.created\",\n      \"shipment.status.updated\",\n      \"shipment.delivered\",\n      \"package.tracking.updated\"\n    ],\n    \"active\": true,\n    \"description\": \"Webhook para notificaciones de envíos\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/webhooks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "webhooks"]
+            },
+            "description": "Registra un nuevo webhook"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Webhooks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/webhooks",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "webhooks"]
+            },
+            "description": "Lista todos los webhooks"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Webhook",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/webhooks/{{webhook_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "webhooks", "{{webhook_id}}"]
+            },
+            "description": "Elimina un webhook"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de webhooks"
+    }
+  ]
+}

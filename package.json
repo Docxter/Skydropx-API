@@ -1,0 +1,50 @@
+{
+  "name": "skydropx-api-sdk",
+  "version": "1.0.0",
+  "description": "SDK profesional para la API de Skydropx - Automatiza envíos, cotizaciones y recolecciones",
+  "main": "src/clients/javascript/SkydropxClient.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "example:auth": "node examples/auth/authenticate.js",
+    "example:quote": "node examples/quotations/create-quotation.js",
+    "example:shipment": "node examples/shipments/create-shipment.js",
+    "example:tracking": "node examples/tracking/track-shipment.js",
+    "lint": "eslint src/ examples/",
+    "format": "prettier --write 'src/**/*.js' 'examples/**/*.js'"
+  },
+  "keywords": [
+    "skydropx",
+    "shipping",
+    "logistics",
+    "api",
+    "sdk",
+    "envios",
+    "paqueteria",
+    "fedex",
+    "dhl",
+    "estafeta"
+  ],
+  "author": "Skydropx Community",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/skydropx-api-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/skydropx-api-sdk/issues"
+  },
+  "homepage": "https://github.com/yourusername/skydropx-api-sdk#readme",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

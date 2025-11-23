@@ -1,0 +1,15 @@
+# Dependencias de Python para Skydropx API SDK
+
+# Core dependencies
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# Para webhooks con Flask
+flask>=3.0.0
+
+# Para desarrollo y testing (opcional)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.0.0
+flake8>=6.1.0
+mypy>=1.7.0
