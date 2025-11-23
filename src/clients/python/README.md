@@ -1,8 +1,13 @@
-# Skydropx Python SDK
+# 🐍 Skydropx Python SDK
 
-SDK oficial de Python para la API de Skydropx.
+Cliente oficial en Python para la API de Skydropx, diseñado para integraciones logísticas, e-commerce, fulfilment y automatización de envíos en México y LATAM.
 
-## 🐍 Características
+![License](https://img.shields.io/github/license/Docxter/Skydropx-API)
+![Python](https://img.shields.io/badge/Python-3.7+-blue)
+![Status](https://img.shields.io/badge/Status-Stable-success)
+![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
+
+## ✨ Características
 
 - ✅ Python 3.7+
 - ✅ Type hints completos
