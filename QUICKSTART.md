@@ -4,8 +4,8 @@
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone https://github.com/tu-usuario/skydropx-api.git
-cd skydropx-api
+git clone https://github.com/Docxter/Skydropx-API.git
+cd Skydropx-API
 ```
 
 ### 2. Configurar Variables de Entorno

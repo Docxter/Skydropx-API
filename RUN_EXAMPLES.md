@@ -6,8 +6,8 @@
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/tu-usuario/skydropx-api.git
-cd skydropx-api
+git clone https://github.com/Docxter/Skydropx-API.git
+cd Skydropx-API
 
 # Configurar credenciales
 cp .env.example .env

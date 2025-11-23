@@ -36,8 +36,8 @@ Cliente SDK profesional para la API de Skydropx. Automatiza envíos, cotizacione
 ### JavaScript/Node.js
 ```bash
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/skydropx-api.git
-cd skydropx-api
+git clone https://github.com/Docxter/Skydropx-API.git
+cd Skydropx-API
 
 # Instalar dependencias
 npm install
@@ -46,8 +46,8 @@ npm install
 ### Python
 ```bash
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/skydropx-api.git
-cd skydropx-api
+git clone https://github.com/Docxter/Skydropx-API.git
+cd Skydropx-API
 
 # Instalar dependencias
 pip install -r requirements.txt
