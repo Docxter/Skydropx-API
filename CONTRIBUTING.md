@@ -132,7 +132,7 @@ Al contribuir, aceptas que tus contribuciones se licencien bajo la licencia MIT 
 ## Necesitas Ayuda?
 
 - 📧 Email: api@skydropx.com
-- 💬 Discussions: https://github.com/yourusername/skydropx-api-sdk/discussions
+- 💬 Discussions: https://github.com/Docxter/Skydropx-API-sdk/discussions
 - 📚 Docs: https://app.skydropx.com/es-MX/api-docs
 
 ¡Gracias por hacer este proyecto mejor! 🚀

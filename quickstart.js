@@ -177,7 +177,7 @@ WEBHOOK_PORT=3000
 ¿Necesitas ayuda?
   📧 api@skydropx.com
   💬 https://help.skydropx.com
-  🐙 https://github.com/yourusername/skydropx-api-sdk
+  🐙 https://github.com/Docxter/Skydropx-API-sdk
 
 ¡Feliz desarrollo! 🚀
 `);

@@ -20,7 +20,7 @@ npm install skydropx-api-client
 O clona el repositorio:
 
 ```bash
-git clone https://github.com/yourusername/skydropx-api-sdk.git
+git clone https://github.com/Docxter/Skydropx-API-sdk.git
 cd skydropx-api-sdk
 npm install
 ```

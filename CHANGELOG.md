@@ -141,7 +141,7 @@ Este proyecto usa [Semantic Versioning](https://semver.org/lang/es/):
 
 ## Enlaces
 
-- [Repositorio](https://github.com/yourusername/skydropx-api-sdk)
-- [Issues](https://github.com/yourusername/skydropx-api-sdk/issues)
+- [Repositorio](https://github.com/Docxter/Skydropx-API-sdk)
+- [Issues](https://github.com/Docxter/Skydropx-API-sdk/issues)
 - [Documentación](https://app.skydropx.com/es-MX/api-docs)
-- [Releases](https://github.com/yourusername/skydropx-api-sdk/releases)
+- [Releases](https://github.com/Docxter/Skydropx-API-sdk/releases)

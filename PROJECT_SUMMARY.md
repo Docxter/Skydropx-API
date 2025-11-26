@@ -321,7 +321,7 @@ Cobertura API:        100%
 
 ```bash
 # Clonar
-git clone https://github.com/yourusername/skydropx-api-sdk.git
+git clone https://github.com/Docxter/Skydropx-API-sdk.git
 cd skydropx-api-sdk
 
 # Instalar dependencias
@@ -341,7 +341,7 @@ node examples/shipments/create-shipment.js
 
 ```bash
 # Clonar
-git clone https://github.com/yourusername/skydropx-api-sdk.git
+git clone https://github.com/Docxter/Skydropx-API-sdk.git
 cd skydropx-api-sdk
 
 # Instalar dependencias
@@ -414,7 +414,7 @@ python examples/shipments/create_shipment.py
 - 📧 **Email**: api@skydropx.com
 - 💬 **Chat**: https://app.skydropx.com
 - 📚 **Docs oficiales**: https://app.skydropx.com/es-MX/api-docs
-- 🐙 **GitHub**: https://github.com/yourusername/skydropx-api-sdk
+- 🐙 **GitHub**: https://github.com/Docxter/Skydropx-API-sdk
 
 ---
 

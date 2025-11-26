@@ -333,7 +333,7 @@ if __name__ == '__main__':
 
 - 📧 **Email**: api@skydropx.com
 - 📚 **Docs**: https://app.skydropx.com/es-MX/api-docs
-- 🐙 **GitHub**: https://github.com/yourusername/skydropx-api
+- 🐙 **GitHub**: https://github.com/Docxter/Skydropx-API
 
 ## 📄 Licencia
 
