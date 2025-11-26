@@ -5,7 +5,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-Node.js-yellow.svg)](src/clients/javascript)
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](src/clients/python)
 
-Cliente SDK profesional para la API de Skydropx. Automatiza envíos, cotizaciones, recolecciones y seguimiento de paquetes con las principales paqueterías de México y Latinoamérica.
+Cliente SDK para la API de Skydropx. Automatiza envíos, cotizaciones, recolecciones y seguimiento de paquetes con las principales paqueterías de México y Latinoamérica.
 
 **🚀 [Ver Guía de Ejecución Rápida](RUN_EXAMPLES.md)** | **📖 [Documentación Completa](docs/)** | **🎯 [Comparar JS vs Python](JAVASCRIPT_VS_PYTHON.md)**
 
